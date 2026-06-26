@@ -39,6 +39,9 @@ export function extractAuthUserFromRequest(
     return null;
   }
 
+  // In a real implementation, you would decode and verify the token here
+  // For now, this function serves as a placeholder for HTTP-based auth
+  console.warn('extractAuthUserFromRequest requires proper token verification implementation');
   return null;
 }
 

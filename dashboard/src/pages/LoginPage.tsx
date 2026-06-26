@@ -49,7 +49,7 @@ export default function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: `linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)), url('/hero.png')`,
+        background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/images/mohcc_building.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         p: 2,
@@ -60,21 +60,20 @@ export default function LoginPage() {
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <Box
               component="img"
-              src="/logo.png"
+              src="/images/mohcc_emblem.png"
               sx={{
-                width: 80,
-                height: 80,
-                borderRadius: 3,
+                width: 100,
+                height: 100,
                 mx: 'auto',
                 mb: 2,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                objectFit: 'contain',
               }}
             />
-            <Typography variant="h5" sx={{ fontWeight: 700, color: '#1A365D' }}>
+            <Typography variant="h5" sx={{ fontWeight: 800, color: '#0E4A27' }}>
               HealthBridge MedTrack
             </Typography>
-            <Typography variant="body2" sx={{ color: '#718096', mt: 0.5 }}>
-              Admin Dashboard - Zimbabwe Medicine Traceability System
+            <Typography variant="body2" sx={{ color: '#D4AF37', fontWeight: 600, mt: 1 }}>
+              Ministry of Health and Child Care<br/>& NatPharm Official Portal
             </Typography>
           </Box>
 
@@ -113,8 +112,8 @@ export default function LoginPage() {
               disabled={loading}
               sx={{
                 py: 1.5,
-                bgcolor: '#1A365D',
-                '&:hover': { bgcolor: '#0F2440' },
+                bgcolor: '#0E4A27',
+                '&:hover': { bgcolor: '#083018' },
               }}
             >
               {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : 'Sign In'}

@@ -14,6 +14,7 @@ export const getSuppliers = functions.https.onCall(async (data, context) => {
     const suppliers: any[] = [];
     snapshot.forEach((doc) => {
       const supplier = doc.data();
+      if (!supplier) return;
       suppliers.push({
         id: doc.id,
         name: supplier.name,
@@ -52,15 +53,17 @@ export const getSupplierPerformance = functions.https.onCall(async (data, contex
 
     let query: FirebaseFirestore.Query = db.collection('suppliers');
 
-    if (supplierId) {
-      query = query.where('supplierId', '==', supplierId);
-    }
-
-    const snapshot = await query.get();
+    // Query for specific supplier by ID if provided
+    const snapshot = supplierId 
+      ? await db.collection('suppliers').doc(supplierId).get().then(doc => ({
+          docs: doc.exists ? [doc] : []
+        }))
+      : await query.get();
     const performance: any[] = [];
 
     for (const doc of snapshot.docs) {
       const supplier = doc.data();
+      if (!supplier) continue;
 
       const consignmentsSnapshot = await db
         .collection('medicineConsignments')

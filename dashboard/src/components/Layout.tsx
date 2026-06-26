@@ -74,15 +74,15 @@ export default function Layout({ children }: LayoutProps) {
       <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', gap: 1.5 }}>
         <Box
           component="img"
-          src="/logo.png"
-          sx={{ width: 40, height: 40, borderRadius: 1 }}
+          src="/images/mohcc_emblem.png"
+          sx={{ width: 40, height: 40, borderRadius: 1, objectFit: 'contain' }}
         />
         <Box>
-          <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#1A365D', lineHeight: 1.2 }}>
-            HealthBridge
+          <Typography variant="subtitle2" sx={{ fontWeight: 800, color: '#0E4A27', lineHeight: 1.2 }}>
+            MoHCC / NatPharm
           </Typography>
-          <Typography variant="caption" sx={{ color: '#718096', fontSize: 11 }}>
-            MedTrack Dashboard
+          <Typography variant="caption" sx={{ color: '#D4AF37', fontWeight: 600, fontSize: 11 }}>
+            Official Portal
           </Typography>
         </Box>
       </Box>
@@ -98,15 +98,15 @@ export default function Layout({ children }: LayoutProps) {
                   if (isMobile) setMobileOpen(false);
                 }}
                 sx={{
-                  borderRadius: 2,
-                  bgcolor: isActive ? '#EBF4FF' : 'transparent',
-                  '&:hover': { bgcolor: isActive ? '#EBF4FF' : '#F7FAFC' },
+                  borderRadius: 3,
+                  bgcolor: isActive ? 'rgba(14, 74, 39, 0.08)' : 'transparent',
+                  '&:hover': { bgcolor: isActive ? 'rgba(14, 74, 39, 0.12)' : 'rgba(15, 23, 42, 0.04)' },
                 }}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 40,
-                    color: isActive ? '#2B6CB0' : '#718096',
+                    color: isActive ? '#0E4A27' : '#64748B',
                   }}
                 >
                   {item.icon}
@@ -115,8 +115,8 @@ export default function Layout({ children }: LayoutProps) {
                   primary={item.label}
                   primaryTypographyProps={{
                     fontSize: 14,
-                    fontWeight: isActive ? 600 : 400,
-                    color: isActive ? '#2B6CB0' : '#4A5568',
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? '#0E4A27' : '#475569',
                   }}
                 />
               </ListItemButton>
@@ -134,15 +134,11 @@ export default function Layout({ children }: LayoutProps) {
   );
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#F7FAFC' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
       <AppBar
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: 'rgba(255,255,255,0.85)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          borderBottom: '1px solid rgba(226,232,240,0.6)',
           ml: { md: `${drawerWidth}px` },
           width: { md: `calc(100% - ${drawerWidth}px)` },
         }}
@@ -167,7 +163,7 @@ export default function Layout({ children }: LayoutProps) {
             </Badge>
           </IconButton>
           <Chip
-            avatar={<Avatar sx={{ bgcolor: '#2B6CB0' }}>{user?.name?.charAt(0) || 'U'}</Avatar>}
+            avatar={<Avatar sx={{ bgcolor: '#0E4A27' }}>{user?.name?.charAt(0) || 'U'}</Avatar>}
             label={user?.name || 'User'}
             variant="outlined"
             onClick={(e) => setAnchorEl(e.currentTarget)}
@@ -209,7 +205,7 @@ export default function Layout({ children }: LayoutProps) {
             sx={{
               '& .MuiDrawer-paper': {
                 width: drawerWidth,
-                borderRight: '1px solid #E2E8F0',
+                boxSizing: 'border-box',
               },
             }}
           >

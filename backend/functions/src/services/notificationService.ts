@@ -1,5 +1,6 @@
 import { db, TIMESTAMP, FIELD_VALUE, messaging } from '../config';
 import * as admin from 'firebase-admin';
+import axios from 'axios';
 
 interface NotificationPayload {
   title: string;
@@ -118,7 +119,6 @@ async function sendEmailNotification(payload: NotificationPayload): Promise<void
 
     if (recipients.length === 0) return;
 
-    const axios = require('axios');
     await axios.post(
       'https://api.sendgrid.com/v3/mail/send',
       {

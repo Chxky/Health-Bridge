@@ -41,6 +41,20 @@ import {
 } from 'recharts';
 import { getComplianceReport, getReorderAssessments } from '../services/api';
 
+const sampleStockData = [
+  { name: 'Central Hosps', inStock: 1200, lowStock: 45 },
+  { name: 'Provincial', inStock: 890, lowStock: 32 },
+  { name: 'District', inStock: 654, lowStock: 28 },
+  { name: 'Clinics', inStock: 432, lowStock: 67 },
+];
+
+const sampleReorderItems = [
+  { medicine: 'Artemether/Lumefantrine', facility: 'Harare Central', currentStock: 45, reorderPoint: 200, urgency: 'critical', suggestedQty: 500 },
+  { medicine: 'ORS Sachets', facility: 'Parirenyatwa', currentStock: 120, reorderPoint: 300, urgency: 'critical', suggestedQty: 600 },
+  { medicine: 'Amoxicillin 250mg', facility: 'Mpilo Central', currentStock: 78, reorderPoint: 250, urgency: 'high', suggestedQty: 400 },
+  { medicine: 'Zinc Sulfate 20mg', facility: 'United Bulawayo', currentStock: 56, reorderPoint: 200, urgency: 'high', suggestedQty: 350 },
+];
+
 export default function DashboardPage() {
   const navigate = useNavigate();
   const [compliance, setCompliance] = useState<any>(null);
@@ -87,13 +101,15 @@ export default function DashboardPage() {
       {/* Hero Section */}
       <Fade in={true} timeout={600}>
         <Card 
+          elevation={0}
           sx={{ 
             mb: 4, 
-            borderRadius: 4, 
-            background: 'linear-gradient(135deg, #1A365D 0%, #2B6CB0 100%)',
+            borderRadius: 6, 
+            background: 'linear-gradient(135deg, #0F172A 0%, #1D4ED8 50%, #3B82F6 100%)',
             color: 'white',
             position: 'relative',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            boxShadow: '0 20px 40px -10px rgba(37,99,235,0.4)',
           }}
         >
         <Box 
@@ -142,8 +158,8 @@ export default function DashboardPage() {
                   variant="determinate" 
                   value={88} 
                   size={120} 
-                  thickness={5} 
-                  sx={{ color: '#48BB78' }} 
+                  thickness={6} 
+                  sx={{ color: '#10B981', filter: 'drop-shadow(0 0 8px rgba(16,185,129,0.5))' }} 
                 />
                 <Box
                   sx={{
@@ -162,7 +178,7 @@ export default function DashboardPage() {
                   </Typography>
                 </Box>
               </Box>
-              <Typography variant="caption" sx={{ display: 'block', mt: 1, fontWeight: 600 }}>
+              <Typography variant="caption" sx={{ display: 'block', mt: 2, fontWeight: 700, letterSpacing: '0.1em', opacity: 0.8 }}>
                 NATIONAL HEALTH SCORE
               </Typography>
             </Grid>
@@ -267,19 +283,22 @@ export default function DashboardPage() {
 
         {/* Charts */}
         <Grid item xs={12} md={8}>
-          <Card>
+          <Card sx={{ height: '100%' }}>
             <CardContent>
-              <Typography variant="h6" sx={{ mb: 2, fontSize: 16 }}>
+              <Typography variant="h6" sx={{ mb: 3, fontWeight: 700 }}>
                 Stock Levels by Facility Type
               </Typography>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={sampleStockData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                  <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
-                  <Tooltip />
-                  <Bar dataKey="inStock" name="In Stock" fill="#38A169" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="lowStock" name="Low Stock" fill="#E53E3E" radius={[4, 4, 0, 0]} />
+              <ResponsiveContainer width="100%" height={320}>
+                <BarChart data={sampleStockData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748B' }} dy={10} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748B' }} />
+                  <Tooltip 
+                    cursor={{ fill: 'rgba(241,245,249,0.4)' }}
+                    contentStyle={{ borderRadius: 12, border: 'none', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}
+                  />
+                  <Bar dataKey="inStock" name="In Stock" fill="#3B82F6" radius={[6, 6, 0, 0]} barSize={32} />
+                  <Bar dataKey="lowStock" name="Low Stock" fill="#EF4444" radius={[6, 6, 0, 0]} barSize={32} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -287,35 +306,35 @@ export default function DashboardPage() {
         </Grid>
 
         <Grid item xs={12} md={4}>
-          <Card>
+          <Card sx={{ height: '100%' }}>
             <CardContent>
-              <Typography variant="h6" sx={{ mb: 2, fontSize: 16 }}>
+              <Typography variant="h6" sx={{ mb: 3, fontWeight: 700 }}>
                 Predictive Analytics
               </Typography>
-              <Stack spacing={2}>
-                <Box sx={{ p: 2, bgcolor: '#F7FAFC', borderRadius: 2, borderLeft: '4px solid #805AD5' }}>
-                  <Typography variant="caption" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Stack spacing={2.5}>
+                <Box sx={{ p: 2.5, bgcolor: 'rgba(139,92,246,0.05)', borderRadius: 3, borderLeft: '4px solid #8B5CF6' }}>
+                  <Typography variant="caption" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, fontWeight: 700, color: '#8B5CF6' }}>
                     <AutoGraph fontSize="small" /> AI PROJECTION
                   </Typography>
-                  <Typography variant="body2" sx={{ fontWeight: 600, mt: 0.5 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 600, mt: 1, color: '#1E293B' }}>
                     High risk of stockout for Insulin in Manicaland Province (ETA: 12 Days)
                   </Typography>
                 </Box>
-                <Box sx={{ p: 2, bgcolor: '#F7FAFC', borderRadius: 2, borderLeft: '4px solid #38A169' }}>
-                  <Typography variant="caption" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <Box sx={{ p: 2.5, bgcolor: 'rgba(16,185,129,0.05)', borderRadius: 3, borderLeft: '4px solid #10B981' }}>
+                  <Typography variant="caption" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, fontWeight: 700, color: '#10B981' }}>
                     <InfoOutlined fontSize="small" /> OPTIMIZATION TIP
                   </Typography>
-                  <Typography variant="body2" sx={{ fontWeight: 600, mt: 0.5 }}>
+                  <Typography variant="body2" sx={{ fontWeight: 600, mt: 1, color: '#1E293B' }}>
                     Re-routing surplus Paracetamol from Bulawayo could save $4k in logistics.
                   </Typography>
                 </Box>
               </Stack>
               
-              <Divider sx={{ my: 3 }} />
+              <Divider sx={{ my: 4 }} />
               
-              <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="h6" sx={{ color: '#2B6CB0', fontWeight: 800 }}>+ Zimbabwe 2030</Typography>
-                <Typography variant="caption" color="textSecondary">Towards a Digitized National Supply Chain</Typography>
+              <Box sx={{ textAlign: 'center', p: 2, bgcolor: 'rgba(37,99,235,0.04)', borderRadius: 4 }}>
+                <Typography variant="h6" sx={{ color: '#2563EB', fontWeight: 800 }}>+ Zimbabwe 2030</Typography>
+                <Typography variant="caption" sx={{ color: '#64748B', fontWeight: 500 }}>Towards a Digitized National Supply Chain</Typography>
               </Box>
             </CardContent>
           </Card>
@@ -393,19 +412,6 @@ export default function DashboardPage() {
   );
 }
 
-const sampleStockData = [
-  { name: 'Central Hosps', inStock: 1200, lowStock: 45 },
-  { name: 'Provincial', inStock: 890, lowStock: 32 },
-  { name: 'District', inStock: 654, lowStock: 28 },
-  { name: 'Clinics', inStock: 432, lowStock: 67 },
-];
-
-const sampleReorderItems = [
-  { medicine: 'Artemether/Lumefantrine', facility: 'Harare Central', currentStock: 45, reorderPoint: 200, urgency: 'critical', suggestedQty: 500 },
-  { medicine: 'ORS Sachets', facility: 'Parirenyatwa', currentStock: 120, reorderPoint: 300, urgency: 'critical', suggestedQty: 600 },
-  { medicine: 'Amoxicillin 250mg', facility: 'Mpilo Central', currentStock: 78, reorderPoint: 250, urgency: 'high', suggestedQty: 400 },
-  { medicine: 'Zinc Sulfate 20mg', facility: 'United Bulawayo', currentStock: 56, reorderPoint: 200, urgency: 'high', suggestedQty: 350 },
-];
 
 function Avatar({ children, sx }: { children: React.ReactNode; sx?: any }) {
   return (

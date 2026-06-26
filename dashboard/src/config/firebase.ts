@@ -1,17 +1,24 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'healthbridge-medtrack.firebaseapp.com',
-  projectId: 'healthbridge-medtrack',
-  storageBucket: 'healthbridge-medtrack.appspot.com',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'demo-api-key',
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'healthbridge-medtrack.firebaseapp.com',
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'healthbridge-medtrack',
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'healthbridge-medtrack.appspot.com',
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '000000000000',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || '1:000000000000:web:demo',
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+if (import.meta.env.VITE_USE_EMULATOR === 'true') {
+  connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+  connectFirestoreEmulator(db, 'localhost', 8080);
+}
+
+export { db, auth };
 export default app;

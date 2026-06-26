@@ -1,7 +1,10 @@
 class AppConfig {
   static const String appName = 'HealthBridge MedTrack';
   static const String appVersion = '1.0.0';
-  static const String apiBaseUrl = 'https://api.healthbridge.co.zw/v1';
+  static const String apiBaseUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'https://api.healthbridge.co.zw/v1',
+  );
   static const String countryCode = 'ZW';
   static const String timezone = 'Africa/Harare';
 

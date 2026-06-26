@@ -12,6 +12,7 @@ import 'screens/stock_screen.dart';
 import 'screens/stock_detail_screen.dart';
 import 'screens/adjustments_screen.dart';
 import 'screens/new_adjustment_screen.dart';
+import 'screens/consignments_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,13 +63,13 @@ class _HealthBridgeMedTrackAppState extends State<HealthBridgeMedTrackApp> {
         useMaterial3: true,
         fontFamily: 'Inter',
         colorScheme: ColorScheme.light(
-          primary: const Color(0xFF1A365D),
-          secondary: const Color(0xFF2B6CB0),
+          primary: const Color(0xFF0E4A27), // MoHCC Deep Green
+          secondary: const Color(0xFFD4AF37), // Gold Accent
           surface: const Color(0xFFFFFFFF),
           error: const Color(0xFFE53E3E),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF1A365D),
+          backgroundColor: Color(0xFF0E4A27),
           foregroundColor: Colors.white,
           elevation: 0,
           centerTitle: true,
@@ -119,6 +120,7 @@ class _HealthBridgeMedTrackAppState extends State<HealthBridgeMedTrackApp> {
         },
         AppRoutes.adjustments: (context) => const AdjustmentsScreen(),
         AppRoutes.newAdjustment: (context) => const NewAdjustmentScreen(),
+        AppRoutes.consignments: (context) => const ConsignmentsScreen(),
       },
     );
   }

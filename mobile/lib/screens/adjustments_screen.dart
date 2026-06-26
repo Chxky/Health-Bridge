@@ -19,7 +19,6 @@ class _AdjustmentsScreenState extends State<AdjustmentsScreen> {
   @override
   void initState() {
     super.initState();
-    _isOnline = _syncService.isOnline;
     _loadMovements();
   }
 

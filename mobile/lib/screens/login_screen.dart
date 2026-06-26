@@ -57,29 +57,36 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7FAFC),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Form(
-              key: _formKey,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/mohcc_building.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.95),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 4)),
+                  ],
+                ),
+                child: Form(
+                  key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Logo & Title
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1A365D),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(
-                      Icons.medical_services_outlined,
-                      color: Colors.white,
-                      size: 40,
-                    ),
+                  Image.asset(
+                    'assets/images/mohcc_emblem.png',
+                    height: 100,
                   ),
                   const SizedBox(height: 24),
                   const Text(
@@ -87,15 +94,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF1A365D),
+                      color: Color(0xFF0E4A27),
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Zimbabwe Medicine Traceability System',
+                    'Ministry of Health and Child Care\n& NatPharm',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF718096),
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFD4AF37),
                     ),
                   ),
                   const SizedBox(height: 48),
@@ -197,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       onPressed: _isLoading ? null : _login,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1A365D),
+                        backgroundColor: const Color(0xFF0E4A27),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -246,6 +255,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
+      ),
+      ),
       ),
     );
   }

@@ -38,7 +38,7 @@ class ApiService {
       final user = _auth.currentUser;
       if (user == null) throw Exception('User not authenticated');
 
-      Query query = _firestore.collection('facilityStock');
+      Query<Map<String, dynamic>> query = _firestore.collection('facilityStock');
 
       final idToken = await user.getIdTokenResult();
       final userFacilityId = idToken.claims?['facilityId'] as String?;
@@ -54,7 +54,7 @@ class ApiService {
 
       final snapshot = await query.get();
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         final daysUntilExpiry = data['expiryDate'] != null
             ? (data['expiryDate'] as Timestamp).toDate()
                 .difference(DateTime.now())
@@ -88,6 +88,7 @@ class ApiService {
     double? gpsLongitude,
     String? facilityId,
   }) async {
+    if (useMock) return {'success': true, 'message': 'Mock scan successful', 'consignmentId': 'C-MOCK-123'};
     try {
       final user = _auth.currentUser;
       if (user == null) throw Exception('User not authenticated');
@@ -122,7 +123,7 @@ class ApiService {
   }) async {
     if (useMock) return mockConsignments;
     try {
-      Query query = _firestore.collection('medicineConsignments');
+      Query<Map<String, dynamic>> query = _firestore.collection('medicineConsignments');
 
       if (facilityId != null) {
         query = query.where('destinationFacility', isEqualTo: facilityId);
@@ -136,7 +137,7 @@ class ApiService {
 
       final snapshot = await query.get();
       return snapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
         return ConsignmentModel(
           id: doc.id,
           medicineName: data['medicineName'] ?? '',
@@ -167,6 +168,7 @@ class ApiService {
     String? notes,
     String? consignmentId,
   }) async {
+    if (useMock) return {'success': true, 'message': 'Mock adjustment recorded'};
     try {
       final user = _auth.currentUser;
       if (user == null) throw Exception('User not authenticated');
@@ -198,6 +200,7 @@ class ApiService {
 
   // Get notifications
   Future<List<AppNotification>> getNotifications({int limit = 50}) async {
+    if (useMock) return mockNotifications;
     try {
       final user = _auth.currentUser;
       if (user == null) throw Exception('User not authenticated');
@@ -244,6 +247,7 @@ class ApiService {
 
   // Mark notification as read
   Future<void> markNotificationRead(String notificationId) async {
+    if (useMock) return;
     try {
       await _firestore.collection('notifications').doc(notificationId).update({
         'read': true,
@@ -255,6 +259,7 @@ class ApiService {
 
   // Get facilities
   Future<List<Map<String, dynamic>>> getFacilities({String? type}) async {
+    if (useMock) return [{'id': 'f1', 'name': 'Parirenyatwa Group of Hospitals', 'type': 'hospital'}];
     try {
       Query query = _firestore.collection('facilities');
       if (type != null) {
@@ -287,6 +292,7 @@ class ApiService {
     String? facilityId,
     int limit = 50,
   }) async {
+    if (useMock) return mockMovements;
     try {
       Query query = _firestore
           .collection('stockMovements')
@@ -323,6 +329,7 @@ class ApiService {
     String? facilityId,
     String? status,
   }) async {
+    if (useMock) return mockPurchaseRequests;
     try {
       Query query = _firestore.collection('purchaseRequests');
 

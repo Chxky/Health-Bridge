@@ -36,10 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF7FAFC),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A365D),
+        backgroundColor: const Color(0xFF0E4A27),
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('HealthBridge MedTrack'),
+        title: const Text('MoHCC / NatPharm Official Portal'),
         actions: [
           // Offline indicator
           Container(
@@ -73,10 +73,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF1A365D), Color(0xFF2B6CB0)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                  image: DecorationImage(
+                    image: const AssetImage('assets/images/natpharm_warehouse.png'),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      const Color(0xFF0E4A27).withOpacity(0.85),
+                      BlendMode.darken,
+                    ),
                   ),
                 ),
                 child: Column(

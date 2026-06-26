@@ -204,7 +204,7 @@ class _NewAdjustmentScreenState extends State<NewAdjustmentScreen> {
 
               // Action
               DropdownButtonFormField<String>(
-                value: _selectedAction,
+                initialValue: _selectedAction,
                 decoration: InputDecoration(
                   labelText: 'Action *',
                   prefixIcon: const Icon(Icons.swap_horiz),

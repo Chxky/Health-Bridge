@@ -14,6 +14,7 @@ import ReorderPage from './pages/ReorderPage';
 import SuppliersPage from './pages/SuppliersPage';
 import ConsignmentsPage from './pages/ConsignmentsPage';
 import ImpactAnalyticsPage from './pages/ImpactAnalyticsPage';
+import NotificationsPage from './pages/NotificationsPage';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -94,6 +95,14 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <ImpactAnalyticsPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/notifications"
+        element={
+          <PrivateRoute>
+            <NotificationsPage />
           </PrivateRoute>
         }
       />

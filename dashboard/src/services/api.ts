@@ -187,6 +187,12 @@ export async function createConsignment(data: {
 
 // Facility & Compliance APIs
 export async function getFacilities(type?: string) {
+  if (USE_MOCK) {
+    return MOCK_FACILITIES.map(f => ({
+      ...f,
+      location: { latitude: f.location.latitude, longitude: f.location.longitude }
+    })).filter(f => !type || f.type === type);
+  }
   try {
     const constraints: any[] = [];
     if (type) constraints.push(where('type', '==', type));
@@ -210,6 +216,27 @@ export async function getFacilities(type?: string) {
 }
 
 export async function getComplianceReport(month?: string) {
+  if (USE_MOCK) {
+    return {
+      month: month || new Date().toISOString().slice(0, 7),
+      overallComplianceRate: 88,
+      totalFacilities: MOCK_FACILITIES.length,
+      compliantCount: Math.max(1, MOCK_FACILITIES.length - 2),
+      partialCount: 1,
+      nonCompliantCount: 1,
+      noDataCount: 0,
+      facilities: MOCK_FACILITIES.map(f => ({
+        facilityId: f.id,
+        facilityName: f.name,
+        facilityType: f.type,
+        consignmentsReceived: 20,
+        consignmentsScanned: 18,
+        complianceRate: 90,
+        lastScanDate: new Date().toISOString(),
+        status: 'compliant'
+      }))
+    };
+  }
   try {
     const targetMonth = month || new Date().toISOString().slice(0, 7);
 
@@ -278,6 +305,12 @@ export async function getComplianceReport(month?: string) {
 
 // Supplier APIs
 export async function getSuppliers() {
+  if (USE_MOCK) {
+    return [
+      { id: 'sup-1', name: 'ZimPharm National', contactEmail: 'sales@zimpharm.co.zw' },
+      { id: 'sup-2', name: 'MedSupply Africa', contactEmail: 'orders@medsupply.africa' }
+    ];
+  }
   try {
     const q = query(collection(db, 'suppliers'), orderBy('name', 'asc'));
     const snapshot = await getDocs(q);
@@ -293,6 +326,24 @@ export async function getSuppliers() {
 
 // Reorder APIs
 export async function getReorderAssessments(facilityId?: string) {
+  if (USE_MOCK) {
+    return {
+      assessments: [
+        {
+          facilityId: 'harare-central',
+          medicineName: 'Paracetamol 500mg',
+          batchNumber: 'B-2023-XYZ',
+          currentQuantity: 50,
+          minimumThreshold: 200,
+          reorderPoint: 500,
+          suggestedOrderQuantity: 1000,
+          urgency: 'critical',
+          estimatedDaysUntilStockout: 2,
+        }
+      ],
+      summary: { total: 1, critical: 1, high: 0, medium: 0 }
+    };
+  }
   try {
     let q;
     if (facilityId) {
@@ -347,6 +398,17 @@ export async function getReorderAssessments(facilityId?: string) {
 }
 
 export async function getPurchaseRequests(facilityId?: string, status?: string) {
+  if (USE_MOCK) {
+    return [
+      {
+        id: 'pr-1',
+        facilityId: facilityId || 'harare-central',
+        status: status || 'pending',
+        generatedAt: new Date().toISOString(),
+        reviewedAt: null
+      }
+    ];
+  }
   try {
     const constraints: any[] = [orderBy('generatedAt', 'desc')];
     if (facilityId) constraints.unshift(where('facilityId', '==', facilityId));
@@ -371,6 +433,14 @@ export async function getPurchaseRequests(facilityId?: string, status?: string) 
 
 // Notifications
 export async function getNotifications(limitCount = 50) {
+  if (USE_MOCK) {
+    return [
+      { id: 'n1', type: 'critical', title: 'Stockout Alert: Paracetamol', message: 'Harare Central Hospital is out of Paracetamol 500mg. Recommend immediate transfer from NatPharm.', time: '10 minutes ago', read: false },
+      { id: 'n2', type: 'warning', title: 'Expiry Warning', message: 'Batch AMX-2024 of Amoxicillin at Mpilo Central expires in 30 days.', time: '2 hours ago', read: false },
+      { id: 'n3', type: 'success', title: 'Consignment Delivered', message: 'Consignment #C-8924 successfully delivered to United Bulawayo Hospitals.', time: '5 hours ago', read: false },
+      { id: 'n4', type: 'info', title: 'System Update', message: 'AI Reorder optimization models have been updated for Q3.', time: '1 day ago', read: true },
+    ];
+  }
   try {
     const q = query(
       collection(db, 'notifications'),
