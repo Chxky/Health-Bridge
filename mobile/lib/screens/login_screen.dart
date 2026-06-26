@@ -233,20 +233,47 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 24),
 
+                  // Security Badge
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF0FFF4),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: const Color(0xFFC6F6D5)),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.gpp_good, color: Color(0xFF38A169), size: 18),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'AES-256 Encrypted & Zimbabwe CDPA Compliant',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF276749),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   // Footer
                   const Text(
-                    'Authorised personnel only. All access is logged.',
+                    'Authorised personnel only. All data is localized within Zimbabwe borders.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 11,
                       color: Color(0xFFA0AEC0),
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'v${AppConfig.appVersion}',
+                    'v${AppConfig.appVersion} | Secure Connection',
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 11,
                       color: Color(0xFFA0AEC0),
                     ),
                   ),

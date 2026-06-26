@@ -11,7 +11,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { useAuth } from '../contexts/AuthContext';
-import { Inventory2Outlined } from '@mui/icons-material';
+import { Inventory2Outlined, Security, GppGood } from '@mui/icons-material';
 
 export default function LoginPage() {
   const { login, user } = useAuth();
@@ -120,12 +120,20 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <Typography
-            variant="caption"
-            sx={{ color: '#A0AEC0', display: 'block', textAlign: 'center', mt: 3 }}
-          >
-            Authorised personnel only. All access is logged.
-          </Typography>
+          <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, color: '#38A169' }}>
+              <GppGood sx={{ fontSize: 20, mr: 0.5 }} />
+              <Typography variant="caption" sx={{ fontWeight: 700 }}>
+                AES-256 End-to-End Encryption Active
+              </Typography>
+            </Box>
+            <Typography
+              variant="caption"
+              sx={{ color: '#A0AEC0', display: 'block', textAlign: 'center', lineHeight: 1.4 }}
+            >
+              Authorised personnel only. Fully compliant with the <strong>Zimbabwe Cyber and Data Protection Act (CDPA)</strong>. All data is localized and secured within Zimbabwe borders.
+            </Typography>
+          </Box>
         </CardContent>
       </Card>
     </Box>

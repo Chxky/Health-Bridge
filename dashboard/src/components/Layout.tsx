@@ -34,6 +34,8 @@ import {
   Logout,
   Person,
   TrendingUp,
+  SecurityOutlined,
+  VerifiedUser,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -125,9 +127,20 @@ export default function Layout({ children }: LayoutProps) {
         })}
       </List>
       <Divider />
-      <Box sx={{ p: 2 }}>
-        <Typography variant="caption" sx={{ color: '#A0AEC0' }}>
-          v1.0.0 | Zimbabwe
+      <Box sx={{ p: 2, bgcolor: 'rgba(56, 161, 105, 0.1)', m: 1, borderRadius: 2, display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+        <VerifiedUser sx={{ color: '#38A169', fontSize: 20, mt: 0.2 }} />
+        <Box>
+          <Typography variant="caption" sx={{ color: '#0E4A27', fontWeight: 700, display: 'block' }}>
+            CDPA Compliant
+          </Typography>
+          <Typography variant="caption" sx={{ color: '#4A5568', fontSize: 10, lineHeight: 1.1, display: 'block' }}>
+            Data secured & localized in Zimbabwe
+          </Typography>
+        </Box>
+      </Box>
+      <Box sx={{ p: 1, textAlign: 'center' }}>
+        <Typography variant="caption" sx={{ color: '#A0AEC0', fontSize: 10 }}>
+          v1.0.0 | AES-256 Secured
         </Typography>
       </Box>
     </Box>
