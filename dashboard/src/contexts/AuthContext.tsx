@@ -58,7 +58,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       } else {
         // Only clear if not in a demo session
-        setUser(prev => (prev?.email === 'demo@healthbridge.zw' ? prev : null));
+        setUser(prev => (prev?.email === 'admin@natpharm.co.zw' ? prev : null));
       }
       setLoading(false);
     });
@@ -67,10 +67,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    if (email === 'demo@healthbridge.zw' && password === 'demo123') {
+    if (email === 'admin@natpharm.co.zw' && password === 'Test@123') {
       setUser({
         uid: 'demo-user-123',
-        email: 'demo@healthbridge.zw',
+        email: 'admin@natpharm.co.zw',
         name: 'Demo Administrator',
         role: 'natpharm_admin',
         facilityId: 'natpharm-central',

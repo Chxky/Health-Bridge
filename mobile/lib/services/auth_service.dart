@@ -22,10 +22,10 @@ class AuthService {
     required String password,
   }) async {
     try {
-      if (email == 'demo@healthbridge.zw' && password == 'demo123') {
+      if (email == 'pharmacist@hospital.co.zw' && password == 'Test@123') {
         _currentUser = UserModel(
           uid: 'demo-pharmacist-123',
-          email: 'demo@healthbridge.zw',
+          email: 'pharmacist@hospital.co.zw',
           name: 'Demo Pharmacist',
           role: 'pharmacist',
           facilityId: 'f1',
