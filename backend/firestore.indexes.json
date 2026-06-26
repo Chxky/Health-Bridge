@@ -1,0 +1,129 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "medicineConsignments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "destinationFacility", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "receivedTimestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "medicineConsignments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "sourceWarehouse", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "dispatchedTimestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "medicineConsignments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "qrCodeData", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "facilityStock",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "facilityId", "order": "ASCENDING" },
+        { "fieldPath": "medicineName", "order": "ASCENDING" },
+        { "fieldPath": "batchNumber", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "facilityStock",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "facilityId", "order": "ASCENDING" },
+        { "fieldPath": "currentQuantity", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "facilityStock",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "facilityId", "order": "ASCENDING" },
+        { "fieldPath": "expiryDate", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "facilityStock",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "expiryDate", "order": "ASCENDING" },
+        { "fieldPath": "currentQuantity", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "stockMovements",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "consignmentId", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "stockMovements",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "performedBy", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "stockMovements",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "action", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "purchaseRequests",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "facilityId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "generatedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "purchaseRequests",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "generatedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "targetRoles", "order": "ARRAY" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "facilityId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "stockMovements",
+      "fieldPath": "notes",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "DESCENDING", "queryScope": "COLLECTION" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+# Node
+node_modules/
+npm-debug.log
+.env
+
+# Firebase
+.firebase/
+.firebaserc
+
+# TypeScript
+*.js.map
+*.d.ts
+
+# Build outputs
+backend/functions/lib/
+dashboard/build/
+dashboard/dist/
+mobile/build/
+mobile/.dart_tool/
+mobile/.packages
+mobile/.pub/
+mobile/pubspec.lock
+
+# Flutter
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs
+*.log
