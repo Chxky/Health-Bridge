@@ -134,6 +134,7 @@ export default function LoginPage() {
               {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : 'Sign In'}
             </Button>
             <Button
+              type="button"
               fullWidth
               variant="outlined"
               size="large"
