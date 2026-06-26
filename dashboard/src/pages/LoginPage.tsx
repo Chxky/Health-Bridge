@@ -27,6 +27,21 @@ export default function LoginPage() {
     }
   }, [user, navigate]);
 
+  const handleDemoLogin = async () => {
+    setEmail('admin@natpharm.co.zw');
+    setPassword('Test@123');
+    setError('');
+    setLoading(true);
+    try {
+      await login('admin@natpharm.co.zw', 'Test@123');
+      navigate('/');
+    } catch (err: any) {
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -117,6 +132,22 @@ export default function LoginPage() {
               }}
             >
               {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : 'Sign In'}
+            </Button>
+            <Button
+              fullWidth
+              variant="outlined"
+              size="large"
+              onClick={handleDemoLogin}
+              disabled={loading}
+              sx={{
+                mt: 2,
+                py: 1.5,
+                color: '#0E4A27',
+                borderColor: '#0E4A27',
+                '&:hover': { borderColor: '#083018', bgcolor: 'rgba(14, 74, 39, 0.04)' },
+              }}
+            >
+              Demo Admin Login
             </Button>
           </form>
 
