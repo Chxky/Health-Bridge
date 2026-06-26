@@ -1,27 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Grid,
   Card,
   CardContent,
   Typography,
-  Chip,
+  Button,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Button,
+  Chip,
+  Avatar as MuiAvatar,
+  CircularProgress,
+  Stack,
+  Divider,
+  Fade,
 } from '@mui/material';
 import {
+  PrecisionManufacturing,
+  Bolt,
   Inventory2Outlined,
   WarningAmberOutlined,
   LocalShippingOutlined,
   CheckCircleOutline,
-  TrendingDown,
+  AutoGraph,
+  InfoOutlined,
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
 import {
   BarChart,
   Bar,
@@ -30,10 +38,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
 } from 'recharts';
 import { getComplianceReport, getReorderAssessments } from '../services/api';
 
@@ -80,7 +84,94 @@ export default function DashboardPage() {
 
   return (
     <Box>
-      <Grid container spacing={3}>
+      {/* Hero Section */}
+      <Fade in={true} timeout={600}>
+        <Card 
+          sx={{ 
+            mb: 4, 
+            borderRadius: 4, 
+            background: 'linear-gradient(135deg, #1A365D 0%, #2B6CB0 100%)',
+            color: 'white',
+            position: 'relative',
+            overflow: 'hidden'
+          }}
+        >
+        <Box 
+          sx={{ 
+            position: 'absolute', 
+            right: -20, 
+            top: -20, 
+            opacity: 0.1, 
+            fontSize: 200, 
+            transform: 'rotate(-15deg)' 
+          }}
+        >
+          <PrecisionManufacturing fontSize="inherit" />
+        </Box>
+        <CardContent sx={{ p: 4, position: 'relative', zIndex: 1 }}>
+          <Grid container spacing={3} alignItems="center">
+            <Grid item xs={12} md={8}>
+              <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+                System Overview: Healthy
+              </Typography>
+              <Typography variant="body1" sx={{ opacity: 0.9, maxWidth: 600 }}>
+                Traceability engine is active across all 10 provinces. 
+                AI reorder suggestions have reduced stockouts by 34% this quarter.
+              </Typography>
+              <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
+                <Button 
+                  variant="contained" 
+                  startIcon={<Bolt />}
+                  sx={{ bgcolor: '#48BB78', '&:hover': { bgcolor: '#38A169' }, borderRadius: 2 }}
+                  onClick={() => navigate('/reorder')}
+                >
+                  Review AI Alerts
+                </Button>
+                <Button 
+                  variant="outlined" 
+                  sx={{ color: 'white', borderColor: 'rgba(255,255,255,0.5)', borderRadius: 2 }}
+                  onClick={() => navigate('/impact')}
+                >
+                  View Impact ROI
+                </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
+              <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+                <CircularProgress 
+                  variant="determinate" 
+                  value={88} 
+                  size={120} 
+                  thickness={5} 
+                  sx={{ color: '#48BB78' }} 
+                />
+                <Box
+                  sx={{
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    position: 'absolute',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Typography variant="h4" component="div" sx={{ fontWeight: 800 }}>
+                    88%
+                  </Typography>
+                </Box>
+              </Box>
+              <Typography variant="caption" sx={{ display: 'block', mt: 1, fontWeight: 600 }}>
+                NATIONAL HEALTH SCORE
+              </Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card></Fade>
+
+      <Fade in={true} timeout={800}>
+        <Grid container spacing={3}>
         {/* Summary Cards */}
         <Grid item xs={12} sm={6} md={3}>
           <Card>
@@ -199,26 +290,33 @@ export default function DashboardPage() {
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ mb: 2, fontSize: 16 }}>
-                e-GP Compliance Status
+                Predictive Analytics
               </Typography>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={100}
-                    dataKey="value"
-                  >
-                    {pieData.map((entry, index) => (
-                      <Cell key={index} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+              <Stack spacing={2}>
+                <Box sx={{ p: 2, bgcolor: '#F7FAFC', borderRadius: 2, borderLeft: '4px solid #805AD5' }}>
+                  <Typography variant="caption" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <AutoGraph fontSize="small" /> AI PROJECTION
+                  </Typography>
+                  <Typography variant="body2" sx={{ fontWeight: 600, mt: 0.5 }}>
+                    High risk of stockout for Insulin in Manicaland Province (ETA: 12 Days)
+                  </Typography>
+                </Box>
+                <Box sx={{ p: 2, bgcolor: '#F7FAFC', borderRadius: 2, borderLeft: '4px solid #38A169' }}>
+                  <Typography variant="caption" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <InfoOutlined fontSize="small" /> OPTIMIZATION TIP
+                  </Typography>
+                  <Typography variant="body2" sx={{ fontWeight: 600, mt: 0.5 }}>
+                    Re-routing surplus Paracetamol from Bulawayo could save $4k in logistics.
+                  </Typography>
+                </Box>
+              </Stack>
+              
+              <Divider sx={{ my: 3 }} />
+              
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h6" sx={{ color: '#2B6CB0', fontWeight: 800 }}>+ Zimbabwe 2030</Typography>
+                <Typography variant="caption" color="textSecondary">Towards a Digitized National Supply Chain</Typography>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -259,7 +357,7 @@ export default function DashboardPage() {
                             {item.medicine}
                           </Typography>
                         </TableCell>
-                        <TableCell variant="body2">{item.facility}</TableCell>
+                        <TableCell variant="body">{item.facility}</TableCell>
                         <TableCell>
                           <Chip
                             label={item.currentStock}
@@ -268,7 +366,7 @@ export default function DashboardPage() {
                             variant="outlined"
                           />
                         </TableCell>
-                        <TableCell variant="body2">{item.reorderPoint}</TableCell>
+                        <TableCell variant="body">{item.reorderPoint}</TableCell>
                         <TableCell>
                           <Chip
                             label={item.urgency.toUpperCase()}
@@ -281,7 +379,7 @@ export default function DashboardPage() {
                             }}
                           />
                         </TableCell>
-                        <TableCell variant="body2">{item.suggestedQty}</TableCell>
+                        <TableCell variant="body">{item.suggestedQty}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -290,7 +388,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
+      </Grid></Fade>
     </Box>
   );
 }

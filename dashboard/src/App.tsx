@@ -12,6 +12,8 @@ import StockPage from './pages/StockPage';
 import CompliancePage from './pages/CompliancePage';
 import ReorderPage from './pages/ReorderPage';
 import SuppliersPage from './pages/SuppliersPage';
+import ConsignmentsPage from './pages/ConsignmentsPage';
+import ImpactAnalyticsPage from './pages/ImpactAnalyticsPage';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -56,6 +58,14 @@ function AppRoutes() {
         }
       />
       <Route
+        path="/consignments"
+        element={
+          <PrivateRoute>
+            <ConsignmentsPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
         path="/compliance"
         element={
           <PrivateRoute>
@@ -76,6 +86,14 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <SuppliersPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/impact"
+        element={
+          <PrivateRoute>
+            <ImpactAnalyticsPage />
           </PrivateRoute>
         }
       />

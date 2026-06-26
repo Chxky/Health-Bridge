@@ -219,7 +219,7 @@ export default function ReorderPage() {
                                 {item.medicineName}
                               </Typography>
                             </TableCell>
-                            <TableCell variant="body2">{item.facilityId}</TableCell>
+                            <TableCell variant="body">{item.facilityId}</TableCell>
                             <TableCell align="center">
                               <Chip
                                 label={item.currentQuantity}
@@ -295,7 +295,7 @@ export default function ReorderPage() {
                               {req.medicineName}
                             </Typography>
                           </TableCell>
-                          <TableCell variant="body2">{req.facilityName || req.facilityId}</TableCell>
+                          <TableCell variant="body">{req.facilityName || req.facilityId}</TableCell>
                           <TableCell align="center">
                             <Typography variant="body2" sx={{ fontWeight: 600 }}>
                               {req.suggestedQuantity}
@@ -325,7 +325,7 @@ export default function ReorderPage() {
                               }}
                             />
                           </TableCell>
-                          <TableCell variant="body2">
+                          <TableCell variant="body">
                             {req.generatedAt
                               ? new Date(req.generatedAt).toLocaleDateString()
                               : '-'}

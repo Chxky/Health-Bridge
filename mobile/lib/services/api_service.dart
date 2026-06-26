@@ -7,6 +7,9 @@ import '../models/stock_model.dart';
 import '../models/stock_movement_model.dart';
 import '../models/notification_model.dart';
 import '../config/app_config.dart';
+import 'mock_data.dart';
+
+const bool useMock = true;
 
 class ApiService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -30,6 +33,7 @@ class ApiService {
     String? facilityId,
     String? medicineName,
   }) async {
+    if (useMock) return mockStock;
     try {
       final user = _auth.currentUser;
       if (user == null) throw Exception('User not authenticated');
@@ -116,6 +120,7 @@ class ApiService {
     String? status,
     int limit = 50,
   }) async {
+    if (useMock) return mockConsignments;
     try {
       Query query = _firestore.collection('medicineConsignments');
 

@@ -14,6 +14,9 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { MOCK_STOCK, MOCK_CONSIGNMENTS, MOCK_FACILITIES } from './mockData';
+
+const USE_MOCK = true; // Set to true for demonstration without backend
 
 interface ApiResponse<T> {
   success: boolean;
@@ -28,6 +31,9 @@ function handleError(error: unknown): never {
 
 // Stock APIs
 export async function getFacilityStock(facilityId: string, medicineName?: string) {
+  if (USE_MOCK) {
+    return MOCK_STOCK.filter(s => s.facilityId === facilityId && (!medicineName || s.medicineName === medicineName));
+  }
   try {
     const constraints: any[] = [where('facilityId', '==', facilityId)];
     if (medicineName) constraints.push(where('medicineName', '==', medicineName));
@@ -63,6 +69,17 @@ export async function getFacilityStock(facilityId: string, medicineName?: string
 }
 
 export async function getNationalStockMap(medicineName?: string, lowStockOnly?: boolean) {
+  if (USE_MOCK) {
+    return MOCK_FACILITIES.map(f => ({
+      facilityId: f.id,
+      facilityName: f.name,
+      facilityType: f.type,
+      location: { lat: f.location.latitude, lng: f.location.longitude },
+      stock: MOCK_STOCK.filter(s => s.facilityId === f.id),
+      stockCount: MOCK_STOCK.filter(s => s.facilityId === f.id).length,
+      lowStockCount: MOCK_STOCK.filter(s => s.facilityId === f.id && s.isLowStock).length,
+    }));
+  }
   try {
     const facilitiesSnapshot = await getDocs(collection(db, 'facilities'));
     const facilities: Record<string, any> = {};
@@ -113,6 +130,9 @@ export async function getNationalStockMap(medicineName?: string, lowStockOnly?: 
 
 // Consignment APIs
 export async function getConsignments(facilityId?: string, status?: string, itemLimit = 50) {
+  if (USE_MOCK) {
+    return MOCK_CONSIGNMENTS.filter(c => (!facilityId || c.destinationFacility === facilityId) && (!status || c.status === status));
+  }
   try {
     const constraints: any[] = [orderBy('receivedTimestamp', 'desc'), limit(itemLimit)];
     if (facilityId) constraints.unshift(where('destinationFacility', '==', facilityId));

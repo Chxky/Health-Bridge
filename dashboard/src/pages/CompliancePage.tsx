@@ -194,7 +194,7 @@ export default function CompliancePage() {
                             {facility.facilityName}
                           </Typography>
                         </TableCell>
-                        <TableCell variant="body2">
+                        <TableCell variant="body">
                           {facility.facilityType?.replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())}
                         </TableCell>
                         <TableCell align="center">{facility.consignmentsReceived}</TableCell>
@@ -216,7 +216,7 @@ export default function CompliancePage() {
                           </Typography>
                         </TableCell>
                         <TableCell>{getStatusChip(facility.status)}</TableCell>
-                        <TableCell variant="body2">
+                        <TableCell variant="body">
                           {facility.lastScanDate
                             ? new Date(facility.lastScanDate).toLocaleDateString()
                             : 'Never'}

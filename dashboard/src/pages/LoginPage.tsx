@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Card,
@@ -13,11 +14,18 @@ import { useAuth } from '../contexts/AuthContext';
 import { Inventory2Outlined } from '@mui/icons-material';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+ 
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +34,7 @@ export default function LoginPage() {
 
     try {
       await login(email, password);
+      navigate('/');
     } catch (err: any) {
       setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
@@ -40,7 +49,9 @@ export default function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: '#F7FAFC',
+        background: `linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)), url('/hero.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         p: 2,
       }}
     >
@@ -48,20 +59,17 @@ export default function LoginPage() {
         <CardContent sx={{ p: 4 }}>
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <Box
+              component="img"
+              src="/logo.png"
               sx={{
-                width: 64,
-                height: 64,
-                bgcolor: '#1A365D',
+                width: 80,
+                height: 80,
                 borderRadius: 3,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 mx: 'auto',
                 mb: 2,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
               }}
-            >
-              <Inventory2Outlined sx={{ color: 'white', fontSize: 32 }} />
-            </Box>
+            />
             <Typography variant="h5" sx={{ fontWeight: 700, color: '#1A365D' }}>
               HealthBridge MedTrack
             </Typography>

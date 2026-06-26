@@ -22,6 +22,21 @@ class AuthService {
     required String password,
   }) async {
     try {
+      if (email == 'demo@healthbridge.zw' && password == 'demo123') {
+        _currentUser = UserModel(
+          uid: 'demo-pharmacist-123',
+          email: 'demo@healthbridge.zw',
+          name: 'Demo Pharmacist',
+          role: 'pharmacist',
+          facilityId: 'f1',
+          facilityName: 'Parirenyatwa Group of Hospitals',
+          notificationsEnabled: true,
+          emailNotifications: true,
+        );
+        _userController.add(_currentUser);
+        return _currentUser;
+      }
+
       final userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,

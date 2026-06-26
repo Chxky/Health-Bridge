@@ -54,6 +54,11 @@ export const theme = createTheme({
         root: {
           borderRadius: 16,
           boxShadow: '0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          '&:hover': {
+            boxShadow: '0 10px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+            transform: 'translateY(-2px)',
+          },
         },
       },
     },
@@ -63,6 +68,11 @@ export const theme = createTheme({
           textTransform: 'none',
           fontWeight: 600,
           borderRadius: 10,
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            transform: 'translateY(-1px)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          },
         },
       },
     },
@@ -70,6 +80,26 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 8,
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: '1px solid #EDF2F7',
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          '& .MuiTableCell-head': {
+            fontWeight: 700,
+            color: '#4A5568',
+            fontSize: '0.8125rem',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+          },
         },
       },
     },

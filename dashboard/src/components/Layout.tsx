@@ -33,6 +33,7 @@ import {
   NotificationsOutlined,
   Logout,
   Person,
+  TrendingUp,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -50,6 +51,7 @@ const navItems = [
   { path: '/reorder', label: 'Reorder Alerts', icon: <WarningAmberOutlined /> },
   { path: '/compliance', label: 'e-GP Compliance', icon: <AssessmentOutlined /> },
   { path: '/suppliers', label: 'Suppliers', icon: <BusinessOutlined /> },
+  { path: '/impact', label: 'Impact & ROI', icon: <TrendingUp /> },
 ];
 
 export default function Layout({ children }: LayoutProps) {
@@ -70,9 +72,11 @@ export default function Layout({ children }: LayoutProps) {
   const drawer = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <Avatar sx={{ bgcolor: '#2B6CB0', width: 40, height: 40 }}>
-          <Inventory2Outlined />
-        </Avatar>
+        <Box
+          component="img"
+          src="/logo.png"
+          sx={{ width: 40, height: 40, borderRadius: 1 }}
+        />
         <Box>
           <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#1A365D', lineHeight: 1.2 }}>
             HealthBridge
@@ -135,8 +139,10 @@ export default function Layout({ children }: LayoutProps) {
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: 'white',
-          borderBottom: '1px solid #E2E8F0',
+          bgcolor: 'rgba(255,255,255,0.85)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          borderBottom: '1px solid rgba(226,232,240,0.6)',
           ml: { md: `${drawerWidth}px` },
           width: { md: `calc(100% - ${drawerWidth}px)` },
         }}

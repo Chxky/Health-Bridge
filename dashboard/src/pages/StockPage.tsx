@@ -105,6 +105,7 @@ export default function StockPage() {
                 <Table size="small">
                   <TableHead>
                     <TableRow>
+                      <TableCell sx={{ fontWeight: 600 }}>Image</TableCell>
                       <TableCell sx={{ fontWeight: 600 }}>Facility</TableCell>
                       <TableCell sx={{ fontWeight: 600 }}>Medicine</TableCell>
                       <TableCell sx={{ fontWeight: 600 }}>Batch</TableCell>
@@ -119,12 +120,19 @@ export default function StockPage() {
                       facility.stock.map((item: any, idx: number) => (
                         <TableRow key={`${facility.facilityId}-${idx}`} hover>
                           <TableCell>
+                            <Box
+                              component="img"
+                              src="/medicine_placeholder.png"
+                              sx={{ width: 40, height: 40, borderRadius: 1, objectFit: 'cover' }}
+                            />
+                          </TableCell>
+                          <TableCell>
                             <Typography variant="body2" sx={{ fontWeight: 600 }}>
                               {facility.facilityName}
                             </Typography>
                           </TableCell>
-                          <TableCell variant="body2">{item.medicineName}</TableCell>
-                          <TableCell variant="body2">{item.batchNumber}</TableCell>
+                          <TableCell variant="body">{item.medicineName}</TableCell>
+                          <TableCell variant="body">{item.batchNumber}</TableCell>
                           <TableCell align="center">
                             <Chip
                               label={item.currentQuantity}
@@ -141,7 +149,7 @@ export default function StockPage() {
                               color={item.isLowStock ? 'error' : 'success'}
                             />
                           </TableCell>
-                          <TableCell variant="body2">
+                          <TableCell variant="body">
                             {item.expiryDate
                               ? new Date(item.expiryDate).toLocaleDateString()
                               : '-'}
