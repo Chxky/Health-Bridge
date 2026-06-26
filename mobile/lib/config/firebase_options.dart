@@ -2,44 +2,44 @@ import 'package:firebase_core/firebase_core.dart';
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    return FirebaseOptions(
-      apiKey: const String.fromEnvironment(
+    return const FirebaseOptions(
+      apiKey: String.fromEnvironment(
         'FIREBASE_API_KEY',
-        defaultValue: 'YOUR_API_KEY',
+        defaultValue: 'AIzaSyBYxQhq9gApCjlhQ5mZuk2OWalvHQLFPWI',
       ),
-      appId: const String.fromEnvironment(
+      appId: String.fromEnvironment(
         'FIREBASE_APP_ID',
-        defaultValue: 'YOUR_APP_ID',
+        defaultValue: '1:817378191380:web:300fa5b75b5c5759b65f01',
       ),
-      messagingSenderId: const String.fromEnvironment(
+      messagingSenderId: String.fromEnvironment(
         'FIREBASE_MESSAGING_SENDER_ID',
-        defaultValue: 'YOUR_SENDER_ID',
+        defaultValue: '817378191380',
       ),
-      projectId: const String.fromEnvironment(
+      projectId: String.fromEnvironment(
         'FIREBASE_PROJECT_ID',
-        defaultValue: 'healthbridge-medtrack',
+        defaultValue: 'health-bridge-e7e9e',
       ),
-      storageBucket: const String.fromEnvironment(
+      storageBucket: String.fromEnvironment(
         'FIREBASE_STORAGE_BUCKET',
-        defaultValue: 'healthbridge-medtrack.appspot.com',
+        defaultValue: 'health-bridge-e7e9e.firebasestorage.app',
       ),
-      authDomain: const String.fromEnvironment(
+      authDomain: String.fromEnvironment(
         'FIREBASE_AUTH_DOMAIN',
-        defaultValue: 'healthbridge-medtrack.firebaseapp.com',
+        defaultValue: 'health-bridge-e7e9e.firebaseapp.com',
       ),
-      databaseURL: const String.fromEnvironment(
+      databaseURL: String.fromEnvironment(
         'FIREBASE_DATABASE_URL',
-        defaultValue: 'https://healthbridge-medtrack.firebaseio.com',
+        defaultValue: 'https://health-bridge-e7e9e.firebaseio.com',
       ),
-      iosBundleId: const String.fromEnvironment(
+      iosBundleId: String.fromEnvironment(
         'FIREBASE_IOS_BUNDLE_ID',
         defaultValue: 'com.healthbridge.medtrack',
       ),
-      androidClientId: const String.fromEnvironment(
+      androidClientId: String.fromEnvironment(
         'FIREBASE_ANDROID_CLIENT_ID',
         defaultValue: 'YOUR_ANDROID_CLIENT_ID',
       ),
-      iosClientId: const String.fromEnvironment(
+      iosClientId: String.fromEnvironment(
         'FIREBASE_IOS_CLIENT_ID',
         defaultValue: 'YOUR_IOS_CLIENT_ID',
       ),

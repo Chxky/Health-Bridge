@@ -54,6 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void _demoLogin() {
+    _emailController.text = 'pharmacist@hospital.co.zw';
+    _passwordController.text = 'Test@123';
+    _login();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -229,6 +235,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: OutlinedButton(
+                      onPressed: _isLoading ? null : _demoLogin,
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: const Color(0xFF0E4A27),
+                        side: const BorderSide(color: Color(0xFF0E4A27)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        'Demo Pharmacist Login',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
